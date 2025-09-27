@@ -34,7 +34,7 @@ Lihat [Backend README](./Backend_Nodejs/README.md) untuk informasi lebih detail 
 
 ### Frontend (Next.js)
 
-Frontend dibangun menggunakan Next.js 14 dengan App Router dan HeroUI untuk komponen UI. Menyediakan antarmuka pengguna untuk mengakses semua fitur backend.
+Frontend dibangun menggunakan Next.js 15 dengan App Router dan HeroUI untuk komponen UI. Menyediakan antarmuka pengguna untuk mengakses semua fitur backend.
 
 **Fitur Utama:**
 - Autentikasi (Sign In/Sign Up)
@@ -44,7 +44,7 @@ Frontend dibangun menggunakan Next.js 14 dengan App Router dan HeroUI untuk komp
 - Tema Gelap/Terang
 
 **Teknologi:**
-- Next.js 14 (App Router)
+- Next.js 15 (App Router)
 - HeroUI
 - Tailwind CSS
 - TypeScript
