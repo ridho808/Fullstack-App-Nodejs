@@ -1,0 +1,94 @@
+"use client";
+
+import { HandleSignUp } from "@/src/actions/FormAuthAction";
+import { Button } from "@heroui/button";
+import { Card, CardBody, CardFooter } from "@heroui/card";
+import { Input } from "@heroui/input";
+import { Link } from "@heroui/link";
+import clsx from "clsx";
+import { useActionState, useEffect } from "react";
+import { Alert } from "@heroui/alert";
+
+import { useRouter } from "next/navigation";
+
+export default function signUpPage() {
+  const initialState = { ok: undefined, errors: "", message: "" };
+  const router = useRouter();
+  const [state, formAction, pending] = useActionState(
+    HandleSignUp,
+    initialState
+  );
+
+  useEffect(() => {
+    if (state.ok) {
+      router.push("/");
+    }
+  }, [state]);
+
+  return (
+    <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
+      <h1 className={clsx("text-2xl font-bold", { "text-violet-600": true })}>
+        Sign Up
+      </h1>
+      <Card className="min-w-[300px] md:w-[400px]">
+        <CardBody className="p-6">
+          <form action={formAction} className="flex flex-col gap-4">
+            <Input
+              label="Email"
+              name="email"
+              required
+              placeholder="Masukkan Email Anda"
+            />
+            <Input
+              label="Nama"
+              name="name"
+              required
+              placeholder="Masukkan Nama Anda"
+            />
+            <Input
+              label="Username"
+              name="username"
+              required
+              placeholder="Masukkan Username Anda"
+            />
+            <Input
+              label="Password"
+              name="password"
+              required
+              placeholder="Masukkan Password Anda"
+              type="password"
+            />
+            <Button
+              size="md"
+              variant="solid"
+              color="secondary"
+              type="submit"
+              disabled={pending}
+              className="w-full"
+            >
+              Sign Up
+            </Button>
+            {state.ok && (
+              <Alert color="success" title={state.message} className="w-full" />
+            )}
+            {!state.ok && state.errors && (
+              <Alert color="danger" title={state.message} className="w-full" />
+            )}
+          </form>
+        </CardBody>
+        <CardFooter className="p-2 flex flex-row items-center justify-center gap-2">
+          <span className="text-md text-gray-500">Sudah memiliki akun? </span>
+          <Link
+            isBlock
+            showAnchorIcon
+            underline="always"
+            color="secondary"
+            href="/sign-in"
+          >
+            Sign In
+          </Link>
+        </CardFooter>
+      </Card>
+    </section>
+  );
+}
